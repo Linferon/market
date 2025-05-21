@@ -1,8 +1,10 @@
 package model;
 
+import util.TableFormatter;
+
 import java.math.BigDecimal;
 
-public class Budget {
+public class Budget implements FormattableEntity{
     private Long id;
     private Integer year;
     private Integer month;
@@ -10,6 +12,47 @@ public class Budget {
     private BigDecimal income;
     private BigDecimal expense;
     private BigDecimal netResult;
+
+    private static final int ID_WIDTH = 5;
+    private static final int DATE_WIDTH = 12;
+    private static final int AMOUNT_WIDTH = 15;
+
+
+    @Override
+    public String toString() {
+        return "Бюджет" +
+                "\nid: " + id +
+                "\nдата: " + year + " " + month +
+                "\nфактический доход: " + income +
+                "\nфактические расходы: " + expense +
+                "\nчистый результат: " + netResult;
+    }
+
+    @Override
+    public String getTableHeader() {
+        return TableFormatter.formatCell("ID", ID_WIDTH) +
+                TableFormatter.formatCell("Дата", DATE_WIDTH) +
+                TableFormatter.formatCell("План", AMOUNT_WIDTH) +
+                TableFormatter.formatCell("Факт доход", AMOUNT_WIDTH) +
+                TableFormatter.formatCell("Факт расход", AMOUNT_WIDTH) +
+                TableFormatter.formatCell("Результат", AMOUNT_WIDTH);
+    }
+
+    @Override
+    public String toTableRow() {
+        return TableFormatter.formatCell(id, ID_WIDTH) +
+                TableFormatter.formatCell(year, DATE_WIDTH) +
+                TableFormatter.formatCell(budget, AMOUNT_WIDTH) +
+                TableFormatter.formatCell(income, AMOUNT_WIDTH) +
+                TableFormatter.formatCell(expense, AMOUNT_WIDTH) +
+                TableFormatter.formatCell(netResult, AMOUNT_WIDTH);
+    }
+
+    @Override
+    public String getTableDivider() {
+        return TableFormatter.createDivider(ID_WIDTH, DATE_WIDTH, AMOUNT_WIDTH, AMOUNT_WIDTH, AMOUNT_WIDTH, AMOUNT_WIDTH, AMOUNT_WIDTH);
+    }
+
 
     public Budget(Integer year, Integer month, BigDecimal budget, BigDecimal income, BigDecimal expense) {
         this.year = year;
@@ -79,19 +122,5 @@ public class Budget {
 
     public void setNetResult(BigDecimal netResult) {
         this.netResult = netResult;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("Budget{");
-        sb.append("id=").append(id);
-        sb.append(", year=").append(year);
-        sb.append(", month=").append(month);
-        sb.append(", budget=").append(budget);
-        sb.append(", income=").append(income);
-        sb.append(", expense=").append(expense);
-        sb.append(", netResult=").append(netResult);
-        sb.append('}');
-        return sb.toString();
     }
 }
