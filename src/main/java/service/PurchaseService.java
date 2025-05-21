@@ -8,6 +8,7 @@ import model.Purchase;
 import model.Stock;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static util.LoggerUtil.*;
 import static util.ValidationUtil.*;
@@ -34,6 +35,14 @@ public class PurchaseService {
     public Purchase getPurchaseById(Long id) {
         return purchaseDao.findById(id)
                 .orElseThrow(() -> new PurchaseNotFoundException("Закупка с ID " + id + " не найдена"));
+    }
+
+    public List<Purchase> getAllPurchases() {
+        List<Purchase> purchases =  purchaseDao.findAll();
+        if (purchases.isEmpty()) {
+            throw new PurchaseNotFoundException("Закупки не были найдены");
+        }
+        return purchases;
     }
 
     public void addPurchase(Purchase purchase) {

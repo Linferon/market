@@ -33,6 +33,14 @@ public class UserService {
         return users;
     }
 
+    public List<User> getActiveUsers() {
+        List<User> users = userDao.findActiveEmployees();
+        if(users.isEmpty()) {
+            throw new UserNotFoundException("Активные пользователи не были найдены");
+        }
+        return users;
+    }
+
     public User getUserById(Long id) {
         return userDao.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("Сотрудник с таким id не был найден!"));
