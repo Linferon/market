@@ -6,19 +6,24 @@ import java.time.Instant;
 
 public class Purchase {
     private Long id;
-    private Product product;
+    private Long productId;
     private Integer quantity;
     private BigDecimal totalCost;
     private Timestamp purchaseDate;
 
-    public Purchase(Long id, Product product, Integer quantity, BigDecimal totalCost) {
-        this(product,quantity,totalCost);
+    public Purchase(Long id, Long productId, Integer quantity, BigDecimal totalCost, Timestamp purchaseDate) {
+        this(id, productId, quantity, totalCost);
+        this.purchaseDate = purchaseDate;
+    }
+
+    public Purchase(Long id, Long productId, Integer quantity, BigDecimal totalCost) {
+        this(productId,quantity,totalCost);
         this.id = id;
         this.purchaseDate = Timestamp.from(Instant.now());
     }
 
-    public Purchase(Product product, Integer quantity, BigDecimal totalCost) {
-        this.product = product;
+    public Purchase(Long productId, Integer quantity, BigDecimal totalCost) {
+        this.productId = productId;
         this.quantity = quantity;
         this.totalCost = totalCost;
         this.purchaseDate = Timestamp.from(Instant.now());
@@ -32,12 +37,12 @@ public class Purchase {
         this.id = id;
     }
 
-    public Product getProduct() {
-        return product;
+    public Long getProductId() {
+        return productId;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
     public Integer getQuantity() {

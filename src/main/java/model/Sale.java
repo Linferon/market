@@ -11,6 +11,11 @@ public class Sale {
     private BigDecimal totalPrice;
     private Timestamp saleDate;
 
+    public Sale(Long id, Long productId, Integer quantity, BigDecimal totalPrice, Timestamp saleDate) {
+        this(id, productId, quantity, totalPrice);
+        this.saleDate = saleDate;
+    }
+
     public Sale(Long id, Long productId, Integer quantity, BigDecimal totalPrice) {
         this(productId, quantity, totalPrice);
         this.id = id;
