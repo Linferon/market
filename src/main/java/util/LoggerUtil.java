@@ -6,6 +6,10 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+
+import static util.ConsoleUtil.print;
+import static util.ConsoleUtil.printError;
+
 public class LoggerUtil {
     private LoggerUtil() {}
     private static final Logger LOGGER = Logger.getLogger(LoggerUtil.class.getName());

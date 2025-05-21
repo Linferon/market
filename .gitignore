@@ -30,3 +30,4 @@ bin/
 /logs/
 *.iml
 *.xml
+/db/

@@ -34,9 +34,9 @@ public class ConsoleUtil {
     public interface DateRangeSupplier<T> {
         List<T> getDateRange(LocalDate startDate, LocalDate endDate);
     }
-
-    public static <T extends FormattableEntity> void showEntitiesTable(List<T> entities, String title) {
-        printHeader(title);
-        println(TableFormatter.formatTable(entities));
-    }
+//
+//    public static <T extends FormattableEntity> void showEntitiesTable(List<T> entities, String title) {
+//        printHeader(title);
+//        println(TableFormatter.formatTable(entities));
+//    }
 }
