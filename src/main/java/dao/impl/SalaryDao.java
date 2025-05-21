@@ -50,9 +50,15 @@ public class SalaryDao extends Dao<Salary> {
             return updated ? salary.getId() : null;
         }
     }
+
+    public boolean markAsPaid(Long id) {
+        String sql = "UPDATE SALARIES SET IS_PAID = TRUE WHERE ID = ?";
+        return update(sql,  id);
+    }
+
     public boolean update(Salary salary ) {
         String sql = """
-                UPDATE SALARIES
+                UPDATE SALARIES 
                 SET USER_ID = ?,SALARY = ?, PERIOD_START = ?, 
                 PERIOD_END = ?, IS_PAID = ? WHERE ID = ?""";
         return update(sql,
