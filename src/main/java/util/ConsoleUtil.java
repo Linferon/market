@@ -1,7 +1,11 @@
 package util;
 
+import model.FormattableEntity;
+
 import java.time.LocalDate;
 import java.util.List;
+
+import static util.InputHandler.getDateInput;
 
 public class ConsoleUtil {
     private ConsoleUtil() {
@@ -32,11 +36,19 @@ public class ConsoleUtil {
 
     @FunctionalInterface
     public interface DateRangeSupplier<T> {
-        List<T> getDateRange(LocalDate startDate, LocalDate endDate);
+        List<T> getForDateRange(LocalDate startDate, LocalDate endDate);
     }
-//
-//    public static <T extends FormattableEntity> void showEntitiesTable(List<T> entities, String title) {
-//        printHeader(title);
-//        println(TableFormatter.formatTable(entities));
-//    }
+
+    public static <T extends FormattableEntity> void selectEntitiesForDateRange(DateRangeSupplier<T> supplier, String headerMessage) {
+        LocalDate startDate = getDateInput("Введите период для поиска" + " (начальная дата, ГГГГ-ММ-ДД): ");
+        LocalDate endDate = getDateInput("Введите период для поиска" + " (конечная дата, ГГГГ-ММ-ДД): ");
+
+        List<T> entities = supplier.getForDateRange(startDate, endDate);
+        showEntitiesTable(entities, headerMessage);
+    }
+
+    public static <T extends FormattableEntity> void showEntitiesTable(List<T> entities, String title) {
+        printHeader(title);
+        println(TableFormatter.formatTable(entities));
+    }
 }
